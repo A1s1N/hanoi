@@ -31,7 +31,7 @@ var towers = [towerOne, towerTwo, towerThree]
 
 func Tower() {
     for i in 0...3 {
-        print("\(towerOne[i]) \(towerTwo[i]) \(towerThree[i])")
+        print("\(towers[0][i]) \(towers[1][i]) \(towers[2][i])")
     }
 }
 Tower()
@@ -100,3 +100,19 @@ step(activeTower: activeTower!, numTower: numTower!)
 //        Tower()
 //    }
 //}
+
+class Person{
+   
+    var name: String
+  var age: Int
+  init(name: String, age: Int){
+       
+      self.name = name
+      self.age = age
+    }
+}
+
+var tom: Person = Person(name: "Tom", age: 24)
+var bob = tom
+bob.name = "Bob"
+print(tom.name) // Bob
