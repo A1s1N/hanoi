@@ -51,7 +51,7 @@ let numTower = Int(readLine()!)
 step(activeTower: activeTower!, numTower: numTower!)
 
 //func step(numTower: Int) {
-//    if numTower == 1 {
+//    if numTower == 1 {к
 //        print("Выберите другую башню")
 //    } else if numTower == 2 {
 //        let slide = towerOne.removeFirst()
