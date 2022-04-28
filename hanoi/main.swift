@@ -25,8 +25,8 @@ var towerOne = [
     big,
     floor
 ]
-var towerTwo = [empty, empty, empty, floor]
-var towerThree = [empty, empty, empty, floor]
+var towerTwo = [empty, empty, empty, floor] //TODO: Дополнять empty, когла towerTwo.count < 4
+var towerThree = [empty, empty, empty, floor] //TODO: Сравнение веса и если append 
 var towers = [towerOne, towerTwo, towerThree]
 
 func Tower() {
