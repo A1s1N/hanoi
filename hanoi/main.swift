@@ -37,19 +37,24 @@ func Tower() {
 Tower()
 
 func step(activeTower: Int, numTower: Int) {
+        while towers[activeTower - 1].first == empty {
+            towers[activeTower - 1].remove(at: 0)
+        }
         let slide = towers[activeTower - 1].removeFirst()
         towers[numTower - 1].removeFirst()
         towers[numTower - 1].insert(slide, at: 2)
-        towers[activeTower - 1].insert(empty, at: 0)
+        while towers[activeTower - 1].count < 4 {
+            towers[activeTower - 1].insert(empty, at: 0) //подставляет empty, когда значений меньше 4
+    }
         Tower()
 }
-
-print("Выберите активную башню")
-let activeTower = Int(readLine()!)
-print("Выберите башню, на которую надо перенести первое кольцо")
-let numTower = Int(readLine()!)
-step(activeTower: activeTower!, numTower: numTower!)
-
+while towerOne != towerTwo {
+    print("Выберите активную башню")
+    let activeTower = Int(readLine()!)
+    print("Выберите башню, на которую надо перенести первое кольцо")
+    let numTower = Int(readLine()!)
+    step(activeTower: activeTower!, numTower: numTower!)
+}
 //func step(numTower: Int) {
 //    if numTower == 1 {к
 //        print("Выберите другую башню")
