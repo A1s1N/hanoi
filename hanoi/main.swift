@@ -41,14 +41,19 @@ func step(activeTower: Int, numTower: Int) {
             towers[activeTower - 1].remove(at: 0)
         }
         let slide = towers[activeTower - 1].removeFirst()
-        towers[numTower - 1].removeFirst()
-        towers[numTower - 1].insert(slide, at: 2)
+        while towers[numTower - 1].first == empty {
+            towers[numTower - 1].remove(at: 0)
+        } //TODO: Придумать другую реализацию
+        towers[numTower - 1].insert(slide, at: 0)
         while towers[activeTower - 1].count < 4 {
             towers[activeTower - 1].insert(empty, at: 0) //подставляет empty, когда значений меньше 4
-    }
+        }
+        while towers[numTower - 1].count < 4 {
+            towers[numTower - 1].insert(empty, at: 0) //подставляет empty, когда значений меньше 4
+        }
         Tower()
 }
-while towerOne != towerTwo {
+while towerTwo != [small, middle, big, floor] {
     print("Выберите активную башню")
     let activeTower = Int(readLine()!)
     print("Выберите башню, на которую надо перенести первое кольцо")
