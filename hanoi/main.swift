@@ -25,8 +25,8 @@ var towerOne = [
     big,
     floor
 ]
-var towerTwo = [empty, empty, empty, floor] //TODO: Дополнять empty, когла towerTwo.count < 4
-var towerThree = [empty, empty, empty, floor] //TODO: Сравнение веса и если append 
+var towerTwo = [empty, empty, empty, floor]
+var towerThree = [empty, empty, empty, floor]
 var towers = [towerOne, towerTwo, towerThree]
 
 func Tower() {
@@ -43,17 +43,17 @@ func step(activeTower: Int, numTower: Int) {
         let slide = towers[activeTower - 1].removeFirst()
         while towers[numTower - 1].first == empty {
             towers[numTower - 1].remove(at: 0)
-        } //TODO: Придумать другую реализацию
+        }
         towers[numTower - 1].insert(slide, at: 0)
         while towers[activeTower - 1].count < 4 {
-            towers[activeTower - 1].insert(empty, at: 0) //подставляет empty, когда значений меньше 4
+            towers[activeTower - 1].insert(empty, at: 0)
         }
         while towers[numTower - 1].count < 4 {
-            towers[numTower - 1].insert(empty, at: 0) //подставляет empty, когда значений меньше 4
+            towers[numTower - 1].insert(empty, at: 0)
         }
         Tower()
 }
-while towerTwo != [small, middle, big, floor] {
+while towers[1] != [small, middle, big, floor] || towers[2] != [small, middle, big, floor] {
     print("Выберите активную башню")
     let activeTower = Int(readLine()!)
     print("Выберите башню, на которую надо перенести первое кольцо")
