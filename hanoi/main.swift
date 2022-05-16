@@ -29,18 +29,20 @@ var towerTwo = [empty, empty, empty, floor]
 var towerThree = [empty, empty, empty, floor]
 var towers = [towerOne, towerTwo, towerThree]
 
-func Tower() {
+var count = Int()
+
+func towerView() {
     for i in 0...3 {
         print("\(towers[0][i]) \(towers[1][i]) \(towers[2][i])")
     }
 }
-Tower()
+towerView()
 
 func step(activeTower: Int, numTower: Int) {
         if activeTower < 1 || activeTower > 3 {
-            Tower()
+            towerView()
         } else if numTower < 1 || numTower > 3 {
-            Tower()
+            towerView()
         } else {
         while towers[activeTower - 1].first == empty {
             towers[activeTower - 1].remove(at: 0)
@@ -60,7 +62,8 @@ func step(activeTower: Int, numTower: Int) {
         while towers[numTower - 1].count < 4 {
             towers[numTower - 1].insert(empty, at: 0)
         }
-        Tower()
+            towerView()
+            count += 1
     }
 }
 while (true) {
@@ -70,7 +73,7 @@ while (true) {
     let numTower = Int(readLine()!)
     step(activeTower: activeTower ?? 0, numTower: numTower ?? 0)
     if towers[1] == [small, middle, big, floor] || towers[2] == [small, middle, big, floor] {
-        print("Игра закончена")
+        print("Игра закончена. Вам потребовалось \(count) шагов")
         break
     }
 }
