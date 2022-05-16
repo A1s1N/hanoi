@@ -63,10 +63,14 @@ func step(activeTower: Int, numTower: Int) {
         Tower()
     }
 }
-while towers[1] != [small, middle, big, floor] || towers[2] != [small, middle, big, floor] {
+while (true) {
     print("Выберите активную башню")
     let activeTower = Int(readLine()!)
     print("Выберите башню, на которую надо перенести первое кольцо")
     let numTower = Int(readLine()!)
-    step(activeTower: activeTower!, numTower: numTower!)
+    step(activeTower: activeTower ?? 0, numTower: numTower ?? 0)
+    if towers[1] == [small, middle, big, floor] || towers[2] == [small, middle, big, floor] {
+        print("Игра закончена")
+        break
+    }
 }
