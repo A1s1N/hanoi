@@ -37,6 +37,11 @@ func Tower() {
 Tower()
 
 func step(activeTower: Int, numTower: Int) {
+        if activeTower < 1 || activeTower > 3 {
+            Tower()
+        } else if numTower < 1 || numTower > 3 {
+            Tower()
+        } else {
         while towers[activeTower - 1].first == empty {
             towers[activeTower - 1].remove(at: 0)
         }
@@ -56,6 +61,7 @@ func step(activeTower: Int, numTower: Int) {
             towers[numTower - 1].insert(empty, at: 0)
         }
         Tower()
+    }
 }
 while towers[1] != [small, middle, big, floor] || towers[2] != [small, middle, big, floor] {
     print("Выберите активную башню")
