@@ -44,7 +44,11 @@ func step(activeTower: Int, numTower: Int) {
         while towers[numTower - 1].first == empty {
             towers[numTower - 1].remove(at: 0)
         }
-        towers[numTower - 1].insert(slide, at: 0)
+        if slide < towers[numTower - 1][0] {
+            towers[numTower - 1].insert(slide, at: 0)
+        } else {
+            towers[activeTower - 1].insert(slide, at: 0)
+        }
         while towers[activeTower - 1].count < 4 {
             towers[activeTower - 1].insert(empty, at: 0)
         }
