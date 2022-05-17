@@ -6,43 +6,56 @@
 //
 import Foundation
 
-let full = [
-    "   *   ",
-    " ***** ",
-    "*******",
-    "-------",
-    "       "
-]
-let small = full[0]
-let middle = full[1]
-let big = full[2]
-let floor = full[3]
-let empty = full[4]
+print("Сколько колец будет в игре?")
 
-var towerOne = [
-    small,
-    middle,
-    big,
-    floor
-]
-var towerTwo = [empty, empty, empty, floor]
-var towerThree = [empty, empty, empty, floor]
+let ringsCount = Int(readLine()!)
+
+var ring = "*"
+var floor = "-"
+var empty = " "
+
+var full = [String]()
+
+for i in 0...ringsCount! - 1 {
+    while ring.count < 2 * ringsCount!  {
+        ring.insert(" ", at: ring.startIndex)
+        ring.insert(" ", at: ring.endIndex)
+    }
+    full.insert(ring, at: i)
+    ring.insert(" ", at: ring.startIndex)
+    ring.insert(" ", at: ring.endIndex)
+    ring = ring.replacingOccurrences(of: " ", with: "")
+    ring += "**"
+    floor += "--"
+    empty += "  "
+
+}
+
+var towerOne = full + [floor]
+var towerTwo = [floor]
+while towerTwo.count != ringsCount! + 1 {
+    towerTwo.insert(empty, at: 0)
+}
+var towerThree = [floor]
+while towerThree.count != ringsCount! + 1 {
+    towerThree.insert(empty, at: 0)
+}
 var towers = [towerOne, towerTwo, towerThree]
 
 var count = Int()
 
-func towerView() {
-    for i in 0...3 {
+func output() {
+    for i in 0...ringsCount! {
         print("\(towers[0][i]) \(towers[1][i]) \(towers[2][i])")
     }
 }
-towerView()
+    output()
 
 func step(activeTower: Int, numTower: Int) {
         if activeTower < 1 || activeTower > 3 {
-            towerView()
+            output()
         } else if numTower < 1 || numTower > 3 {
-            towerView()
+            output()
         } else {
         while towers[activeTower - 1].first == empty {
             towers[activeTower - 1].remove(at: 0)
@@ -56,13 +69,13 @@ func step(activeTower: Int, numTower: Int) {
         } else {
             towers[activeTower - 1].insert(slide, at: 0)
         }
-        while towers[activeTower - 1].count < 4 {
+        while towers[activeTower - 1].count < ringsCount! + 1 {
             towers[activeTower - 1].insert(empty, at: 0)
         }
-        while towers[numTower - 1].count < 4 {
+        while towers[numTower - 1].count < ringsCount! + 1 {
             towers[numTower - 1].insert(empty, at: 0)
         }
-            towerView()
+            output()
             count += 1
     }
 }
@@ -72,7 +85,7 @@ while (true) {
     print("Выберите башню, на которую надо перенести первое кольцо")
     let numTower = Int(readLine()!)
     step(activeTower: activeTower ?? 0, numTower: numTower ?? 0)
-    if towers[1] == [small, middle, big, floor] || towers[2] == [small, middle, big, floor] {
+    if towers[1] == full + [floor] || towers[2] == full + [floor] {
         print("Игра закончена. Вам потребовалось \(count) шагов")
         break
     }
