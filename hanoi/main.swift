@@ -60,7 +60,14 @@ func step(activeTower: Int, numTower: Int) {
         while towers[activeTower - 1].first == empty {
             towers[activeTower - 1].remove(at: 0)
         }
+        if towers[activeTower - 1].first == floor {
+            while towers[activeTower - 1].count < ringsCount + 1 {
+                towers[activeTower - 1].insert(empty, at: 0)
+            }
+            output()
+        } else {
         let slide = towers[activeTower - 1].removeFirst()
+
         while towers[numTower - 1].first == empty {
             towers[numTower - 1].remove(at: 0)
         }
@@ -77,6 +84,7 @@ func step(activeTower: Int, numTower: Int) {
         }
             output()
             count += 1
+        }
     }
 }
 while (true) {
