@@ -8,7 +8,7 @@ import Foundation
 
 print("Сколько колец будет в игре?")
 
-let ringsCount = Int(readLine()!)
+let ringsCount = (Int(readLine()!)) ?? 3
 
 var ring = "*"
 var floor = "-"
@@ -16,8 +16,8 @@ var empty = " "
 
 var full = [String]()
 
-for i in 0...ringsCount! - 1 {
-    while ring.count < 2 * ringsCount!  {
+for i in 0...ringsCount - 1 {
+    while ring.count < 2 * ringsCount {
         ring.insert(" ", at: ring.startIndex)
         ring.insert(" ", at: ring.endIndex)
     }
@@ -33,11 +33,11 @@ for i in 0...ringsCount! - 1 {
 
 var towerOne = full + [floor]
 var towerTwo = [floor]
-while towerTwo.count != ringsCount! + 1 {
+while towerTwo.count != ringsCount + 1 {
     towerTwo.insert(empty, at: 0)
 }
 var towerThree = [floor]
-while towerThree.count != ringsCount! + 1 {
+while towerThree.count != ringsCount + 1 {
     towerThree.insert(empty, at: 0)
 }
 var towers = [towerOne, towerTwo, towerThree]
@@ -45,7 +45,7 @@ var towers = [towerOne, towerTwo, towerThree]
 var count = Int()
 
 func output() {
-    for i in 0...ringsCount! {
+    for i in 0...ringsCount {
         print("\(towers[0][i]) \(towers[1][i]) \(towers[2][i])")
     }
 }
@@ -69,10 +69,10 @@ func step(activeTower: Int, numTower: Int) {
         } else {
             towers[activeTower - 1].insert(slide, at: 0)
         }
-        while towers[activeTower - 1].count < ringsCount! + 1 {
+        while towers[activeTower - 1].count < ringsCount + 1 {
             towers[activeTower - 1].insert(empty, at: 0)
         }
-        while towers[numTower - 1].count < ringsCount! + 1 {
+        while towers[numTower - 1].count < ringsCount + 1 {
             towers[numTower - 1].insert(empty, at: 0)
         }
             output()
@@ -81,10 +81,10 @@ func step(activeTower: Int, numTower: Int) {
 }
 while (true) {
     print("Выберите активную башню")
-    let activeTower = Int(readLine()!)
+    let activeTower = (Int(readLine()!)) ?? 0
     print("Выберите башню, на которую надо перенести первое кольцо")
-    let numTower = Int(readLine()!)
-    step(activeTower: activeTower ?? 0, numTower: numTower ?? 0)
+    let numTower = (Int(readLine()!)) ?? 0
+    step(activeTower: activeTower, numTower: numTower)
     if towers[1] == full + [floor] || towers[2] == full + [floor] {
         print("Игра закончена. Вам потребовалось \(count) шагов")
         break
