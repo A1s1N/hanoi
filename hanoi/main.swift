@@ -24,8 +24,6 @@ func createPlayground(ringsCount: Int) {
             ring.insert(" ", at: ring.endIndex)
         }
     full.insert(ring, at: i)
-    ring.insert(" ", at: ring.startIndex)
-    ring.insert(" ", at: ring.endIndex)
     ring = ring.replacingOccurrences(of: " ", with: "")
     ring += "**"
     floor += "--"
