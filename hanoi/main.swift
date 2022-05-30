@@ -12,12 +12,17 @@ var empty = " "
 
 var full = [String]()
 
-var towerOne = [String]()
-var towerTwo = [String]()
-var towerThree = [String]()
+var tower = [String]()
 var towers = [[String]]()
 
-func createPlayground(ringsCount: Int) {
+
+
+func createPlayground(ringsCount: Int, towersCount: Int) {
+    
+    for i in 0...towersCount - 1 {
+        towers.insert(tower, at: i)
+    }
+    
     for i in 0...ringsCount - 1 {
         while ring.count < 2 * ringsCount {
             ring.insert(" ", at: ring.startIndex)
@@ -29,25 +34,30 @@ func createPlayground(ringsCount: Int) {
     floor += "--"
     empty += "  "
     }
-    towerOne = full + [floor]
-    towerTwo = [floor]
-        while towerTwo.count != ringsCount + 1 {
-            towerTwo.insert(empty, at: 0)
+    towers[0] = full + [floor]
+    
+    for i in 1...towersCount - 1 {
+        towers[i] = [floor]
+        while towers[i].count != ringsCount + 1 {
+            towers[i].insert(empty, at: 0)
         }
-    towerThree = [floor]
-        while towerThree.count != ringsCount + 1 {
-            towerThree.insert(empty, at: 0)
-        }
-    towers = [towerOne, towerTwo, towerThree]
-    output(ringsCount: ringsCount)
+    }
+    output()
 }
 
 var counter = Int()
 
-func output(ringsCount: Int) {
+func output() {
+    var out = String()
     for i in 0...ringsCount {
-        print("\(towers[0][i]) \(towers[1][i]) \(towers[2][i])")
+        for n in 0...towersCount - 1 {
+            out += "\(towers[n][i]) "
+            if n == towersCount - 1 {
+                out += "\n"
+            }
+        }
     }
+    print(out)
 }
 
 func deleteEmpty(_ n: Int) {
@@ -64,19 +74,11 @@ func addEmpty(_ n: Int, ringsCount: Int) {
 
 func step(activeTower: Int, numTower: Int, ringsCount: Int) {
         
-    if activeTower < 1 || activeTower > 3 {
-        output(ringsCount: ringsCount)
-        return
-    } else if numTower < 1 || numTower > 3 {
-        output(ringsCount: ringsCount)
-        return
-    } else {
         deleteEmpty(activeTower - 1)
 
         if towers[activeTower - 1].first == floor {
             addEmpty(activeTower - 1, ringsCount: ringsCount)
-            output(ringsCount: ringsCount)
-            return
+            output()
         } else {
         let slide = towers[activeTower - 1].removeFirst()
 
@@ -89,15 +91,18 @@ func step(activeTower: Int, numTower: Int, ringsCount: Int) {
         }
             addEmpty(activeTower - 1, ringsCount: ringsCount)
             addEmpty(numTower - 1, ringsCount: ringsCount)
-            output(ringsCount: ringsCount)
+            output()
             counter += 1
+            
         }
     }
-}
+
+print("Сколько башен будет в игре?")
+let towersCount = (Int(readLine()!)) ?? 3
 
 print("Сколько колец будет в игре?")
 let ringsCount = (Int(readLine()!)) ?? 3
-createPlayground(ringsCount: ringsCount)
+createPlayground(ringsCount: ringsCount, towersCount: towersCount)
 
 while (true) {
     print("Выберите активную башню")
@@ -105,10 +110,16 @@ while (true) {
     
     print("Выберите башню, на которую надо перенести первое кольцо")
     let numTower = (Int(readLine()!)) ?? 0
-    
-    step(activeTower: activeTower, numTower: numTower, ringsCount: ringsCount)
-    if towers[1] == full + [floor] || towers[2] == full + [floor] {
-        print("Игра закончена. Вам потребовалось \(counter) шагов")
-        break
+     
+    if activeTower < 1 || activeTower > towersCount {
+        output()
+    } else if numTower < 1 || numTower > towersCount {
+        output()
+    } else {
+        step(activeTower: activeTower, numTower: numTower, ringsCount: ringsCount)
+        if towers[numTower - 1] == full + [floor] {
+            print("Игра закончена. Вам потребовалось \(counter) шагов")
+            break
     }
+}
 }
